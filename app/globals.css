@@ -1,26 +1,51 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Fondo general */
+  --background: #fcf8f7;
+
+  /* Tarjetas */
+  --card: #ffffff;
+  --card-border: #f2e5e7;
+
+  /* Color principal */
+  --primary: #d98aa6;
+  --primary-hover: #c97897;
+
+  /* Colores secundarios */
+  --secondary: #f7d9cf;
+  --accent: #f8ece8;
+
+  /* Textos */
+  --text-main: #49363b;
+  --text-muted: #8d777d;
+
+  /* Extras */
+  --success: #93c8b5;
+  --danger: #d56a7a;
 }
 
 @theme inline {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+
+  --color-success: var(--success);
+  --color-danger: var(--danger);
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text-main);
+  font-family: Inter, Arial, Helvetica, sans-serif;
 }

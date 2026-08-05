@@ -6,17 +6,20 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <div className="w-72 h-130 flex flex-col bg-card border border-card-border rounded-3xl overflow-hidden shadow-md m-2">
-      <img
-        className="w-full h-75 object-cover"
-        src={product.imageUrl}
-        alt={product.name}
-      />
+    <div className="w-64 h-120 flex flex-col bg-card border border-card-border rounded-3xl overflow-hidden shadow-md m-2 transition-all  duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <div className="h-72 overflow-hidden">
+        <img
+          className="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+          src={product.imageUrl}
+          alt={product.name}
+        />
+      </div>
+
       <div className="p-5 flex flex-col grow space-y-4">
-        <span className="text-sm text-text-muted uppercase">
+        <span className="text-sm text-text-muted uppercase tracking-widest font-medium">
           {product.brand}
         </span>
-        <h3 className="text-base font-semibold">{product.name}</h3>
+        <h3 className="text-base font-semibold line-clamp-2">{product.name}</h3>
         <span className="text-primary font-bold">
           {new Intl.NumberFormat("es-CO", {
             style: "currency",
@@ -25,7 +28,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           }).format(product.price)}
         </span>
 
-        <button className=" flex flex-row gap-2 bg-primary rounded-2xl p-2 items-center justify-center text-white mt-auto hover:bg-primary-hover">
+        <button className=" flex flex-row gap-2 bg-primary rounded-2xl p-2 items-center justify-center text-white mt-auto hover:bg-primary-hover active:scale-95  duration-200 ease-in-out">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"

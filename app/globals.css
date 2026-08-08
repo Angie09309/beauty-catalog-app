@@ -7,6 +7,7 @@
   /* Tarjetas */
   --card: #ffffff;
   --card-border: #f2e5e7;
+  --brand-border: #f4d3e0;
 
   /* Color principal */
   --primary: #d98aa6;
@@ -36,6 +37,7 @@
 
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
+  --color-brand-border: var(--brand-border);
 
   --color-text-main: var(--text-main);
   --color-text-muted: var(--text-muted);

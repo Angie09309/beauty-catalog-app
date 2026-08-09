@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -15,7 +16,7 @@
 
   /* Colores secundarios */
   --secondary: #f7d9cf;
-  --accent: #f8ece8;
+  --accent: #fde9e7e8;
 
   /* Textos */
   --text-main: #49363b;
@@ -23,10 +24,12 @@
 
   /* Extras */
   --success: #93c8b5;
-  --danger: #d56a7a;
+  --danger: #f8ece8;
 }
 
 @theme inline {
+  --font-serif: "Playfair Display", serif;
+
   --color-background: var(--background);
 
   --color-card: var(--card);
@@ -49,5 +52,5 @@
 body {
   background: var(--background);
   color: var(--text-main);
-  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-family: "Playfair Display", serif, system-ui;
 }

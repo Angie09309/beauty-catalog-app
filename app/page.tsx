@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
 
-import ProductCard from "./components/ProductCard";
 import { ProductGrid } from "./components/ProductGrid";
 import { PRODUCTS } from "./data/products";
 import BrandFilter from "./components/BrandFilter";
+import PromoBanner from "./components/PromoBanner";
 
 export default function Home() {
   const [itemBrand, setItemBrand] = useState("Todas");
@@ -16,6 +16,8 @@ export default function Home() {
 
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <PromoBanner />
+
       <h2 className="text-xl font-semibold my-4">Marcas destacadas</h2>
       <BrandFilter selectedBrand={itemBrand} onSelectBrand={setItemBrand} />
 

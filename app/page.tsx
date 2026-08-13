@@ -6,6 +6,8 @@ import { PRODUCTS } from "./data/products";
 import BrandFilter from "./components/BrandFilter";
 import PromoBanner from "./components/PromoBanner";
 import Header from "./components/Header";
+import Cart from "./components/Cart";
+import { CartItem, Product } from "./types/index";
 
 export default function Home() {
   const [itemBrand, setItemBrand] = useState("Todas");
@@ -14,6 +16,46 @@ export default function Home() {
     itemBrand === "Todas"
       ? PRODUCTS
       : PRODUCTS.filter((productos) => productos.brand === itemBrand);
+
+  const [cartList, setCartList] = useState<CartItem[]>([]);
+
+  function handleAddToCart(product: Product) {
+    const existe = cartList.some((item) => item.id === product.id);
+
+    if (existe) {
+      setCartList(
+        cartList.map((item) => {
+          if (item.id === product.id) {
+            return { ...item, quantity: item.quantity + 1 };
+          } else {
+            return item;
+          }
+        }),
+      );
+    } else {
+      setCartList([...cartList, { ...product, quantity: 1 }]);
+    }
+  }
+
+  function handleUpdateQuantity(id: string, newQuantity: number) {
+    if (newQuantity <= 0) {
+      handleRemoveItem(id);
+      return;
+    }
+    setCartList(
+      cartList.map((item) => {
+        if (item.id === id) {
+          return { ...item, quantity: newQuantity };
+        } else {
+          return item;
+        }
+      }),
+    );
+  }
+
+  function handleRemoveItem(id: string) {
+    setCartList(cartList.filter((item) => item.id !== id));
+  }
 
   return (
     <>
@@ -25,7 +67,13 @@ export default function Home() {
         <BrandFilter selectedBrand={itemBrand} onSelectBrand={setItemBrand} />
 
         <h2 className="text-xl font-semibold mt-8 mb-4">Catálogo</h2>
-        <ProductGrid makeup={filteredProducts} />
+        <ProductGrid makeup={filteredProducts} onAddToCart={handleAddToCart} />
+
+        <Cart
+          cartItems={cartList}
+          onUpdateQuantity={handleUpdateQuantity}
+          onRemoveItem={handleRemoveItem}
+        />
       </main>
     </>
   );

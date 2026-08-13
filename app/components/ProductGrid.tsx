@@ -3,6 +3,7 @@ import ProductCard from "./ProductCard";
 
 export interface ProductGridProps {
   makeup: Product[];
+  onAddToCart: (product: Product) => void;
 }
 
 export function ProductGrid({ makeup }: ProductGridProps) {

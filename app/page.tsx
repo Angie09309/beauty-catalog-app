@@ -57,6 +57,8 @@ export default function Home() {
     setCartList(cartList.filter((item) => item.id !== id));
   }
 
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
   return (
     <>
       <Header />

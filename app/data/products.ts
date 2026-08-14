@@ -1,4 +1,4 @@
-import { Product } from "../types";
+import { infoProduct } from "../types/index";
 
 export const BRANDS = [
   "Trendy",
@@ -11,7 +11,7 @@ export const BRANDS = [
 
 export type Brand = (typeof BRANDS)[number];
 
-export const PRODUCTS: Product[] = [
+export const PRODUCTS: infoProduct[] = [
   {
     id: "1",
     name: "Labial líquido mate Velvet",

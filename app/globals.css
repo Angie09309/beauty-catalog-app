@@ -23,8 +23,8 @@
   --text-muted: #8d777d;
 
   /* Extras */
-  --success: #93c8b5;
-  --danger: #f8ece8;
+  --success: #f7f0f5;
+  --danger: #31c35a;
 }
 
 @theme inline {

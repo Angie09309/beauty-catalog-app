@@ -1,4 +1,5 @@
 import { CartItem } from "../types";
+import { formatearPrecio } from "../utils/format";
 
 export interface CartItemRowProps {
   productCart: CartItem;
@@ -20,13 +21,7 @@ export default function CartItemRow({
       <div>
         <h2>{productCart.name}</h2>
         <p>{productCart.brand}</p>
-        <span>
-          {new Intl.NumberFormat("es-CO", {
-            style: "currency",
-            currency: "COP",
-            maximumFractionDigits: 0,
-          }).format(productCart.price)}
-        </span>
+        <span>{formatearPrecio(productCart.price)}</span>
       </div>
 
       <div>

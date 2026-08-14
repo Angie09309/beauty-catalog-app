@@ -1,4 +1,4 @@
-export interface Product {
+export interface infoProduct {
   id: string;
   name: string;
   brand: string;
@@ -8,6 +8,6 @@ export interface Product {
   description: string;
 }
 
-export interface CartItem extends Product {
+export interface CartItem extends infoProduct {
   quantity: number;
 }

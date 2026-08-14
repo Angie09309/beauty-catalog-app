@@ -1,34 +1,40 @@
-import { Product } from "../types";
+import { infoProduct } from "../types";
+import { formatearPrecio } from "../utils/format";
 
 interface ProductCardProps {
-  product: Product;
+  unProducto: infoProduct;
+  onAddToCart: (unProducto: infoProduct) => void;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({
+  unProducto,
+  onAddToCart,
+}: ProductCardProps) {
   return (
     <div className="w-64 h-120 flex flex-col bg-card border border-card-border rounded-3xl overflow-hidden shadow-md m-2 transition-all  duration-300 hover:-translate-y-1 hover:shadow-lg">
       <div className="h-72 overflow-hidden">
         <img
           className="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
-          src={product.imageUrl}
-          alt={product.name}
+          src={unProducto.imageUrl}
+          alt={unProducto.name}
         />
       </div>
 
       <div className="p-5 flex flex-col grow space-y-4">
         <span className="text-sm text-text-muted uppercase tracking-widest font-medium">
-          {product.brand}
+          {unProducto.brand}
         </span>
-        <h3 className="text-base font-semibold line-clamp-2">{product.name}</h3>
+        <h3 className="text-base font-semibold line-clamp-2">
+          {unProducto.name}
+        </h3>
         <span className="text-primary font-bold">
-          {new Intl.NumberFormat("es-CO", {
-            style: "currency",
-            currency: "COP",
-            maximumFractionDigits: 0,
-          }).format(product.price)}
+          {formatearPrecio(unProducto.price)}
         </span>
 
-        <button className=" flex flex-row gap-2 bg-primary rounded-2xl p-2 items-center justify-center text-white mt-auto hover:bg-primary-hover active:scale-95  duration-200 ease-in-out">
+        <button
+          className=" flex flex-row gap-2 bg-primary rounded-2xl p-2 items-center justify-center text-white mt-auto hover:bg-primary-hover active:scale-95  duration-200 ease-in-out"
+          onClick={() => onAddToCart(unProducto)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"

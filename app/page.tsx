@@ -7,7 +7,7 @@ import BrandFilter from "./components/BrandFilter";
 import PromoBanner from "./components/PromoBanner";
 import Header from "./components/Header";
 import Cart from "./components/Cart";
-import { CartItem, Product } from "./types/index";
+import { CartItem, infoProduct } from "./types/index";
 
 export default function Home() {
   const [itemBrand, setItemBrand] = useState("Todas");
@@ -19,13 +19,13 @@ export default function Home() {
 
   const [cartList, setCartList] = useState<CartItem[]>([]);
 
-  function handleAddToCart(product: Product) {
-    const existe = cartList.some((item) => item.id === product.id);
+  function handleAddToCart(ProductCart: infoProduct) {
+    const existe = cartList.some((item) => item.id === ProductCart.id);
 
     if (existe) {
       setCartList(
         cartList.map((item) => {
-          if (item.id === product.id) {
+          if (item.id === ProductCart.id) {
             return { ...item, quantity: item.quantity + 1 };
           } else {
             return item;
@@ -33,7 +33,7 @@ export default function Home() {
         }),
       );
     } else {
-      setCartList([...cartList, { ...product, quantity: 1 }]);
+      setCartList([...cartList, { ...ProductCart, quantity: 1 }]);
     }
   }
 
@@ -67,7 +67,10 @@ export default function Home() {
         <BrandFilter selectedBrand={itemBrand} onSelectBrand={setItemBrand} />
 
         <h2 className="text-xl font-semibold mt-8 mb-4">Catálogo</h2>
-        <ProductGrid makeup={filteredProducts} onAddToCart={handleAddToCart} />
+        <ProductGrid
+          makeup={filteredProducts}
+          alHacerClicEnAgregar={handleAddToCart}
+        />
 
         <Cart
           cartItems={cartList}

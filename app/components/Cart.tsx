@@ -38,7 +38,7 @@ export default function Cart({
   }
 
   return (
-    <div className="fixed top-0 right-0 z-50 h-full w-full sm:w-96 flex flex-col p-6 bg-card border-l border-card-border shadow-2xl">
+    <div className="fixed top-0 right-0 z-50 h-full w-full sm:w-110 flex flex-col p-6 bg-card border-l border-card-border shadow-2xl">
       <div className="flex justify-between mb-3 ">
         <h1 className="font-semibold text-3xl  ">Tu pedido</h1>
 

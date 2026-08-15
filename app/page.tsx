@@ -59,9 +59,17 @@ export default function Home() {
 
   const [isCartOpen, setIsCartOpen] = useState(false);
 
+  function onOpenCart() {
+    setIsCartOpen(true);
+  }
+
+  function onCloseCart() {
+    setIsCartOpen(false);
+  }
+
   return (
     <>
-      <Header />
+      <Header onOpenCartHeader={onOpenCart} />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <PromoBanner />
 
@@ -75,9 +83,11 @@ export default function Home() {
         />
 
         <Cart
+          isCartOpen={isCartOpen}
           cartItems={cartList}
           onUpdateQuantity={handleUpdateQuantity}
           onRemoveItem={handleRemoveItem}
+          onCloseCartX={onCloseCart}
         />
       </main>
     </>

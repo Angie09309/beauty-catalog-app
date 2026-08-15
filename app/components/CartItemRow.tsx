@@ -62,7 +62,7 @@ export default function CartItemRow({
             onClick={() =>
               onUpdateQuantity(productCart.id, productCart.quantity + 1)
             }
-            className="h-full flex items-center px-1.5F rounded-full justify-center  hover:bg-brand-border transition-colors"
+            className="h-full flex items-center px-1.5 rounded-full justify-center  hover:bg-brand-border transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

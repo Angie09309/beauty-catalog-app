@@ -1,4 +1,8 @@
-export default function Header() {
+interface HeaderProp {
+  onOpenCartHeader: () => void;
+}
+
+export default function Header({ onOpenCartHeader }: HeaderProp) {
   return (
     <header className="w-full border-b border-primary/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-3">
@@ -33,7 +37,11 @@ export default function Header() {
         </div>
 
         <div>
-          <button>
+          <button
+            onClick={() => {
+              onOpenCartHeader();
+            }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"

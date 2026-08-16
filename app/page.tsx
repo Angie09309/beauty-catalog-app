@@ -19,6 +19,8 @@ export default function Home() {
 
   const [cartList, setCartList] = useState<CartItem[]>([]);
 
+  const [toastMessage, setToastMessage] = useState("");
+
   function handleAddToCart(ProductCart: infoProduct) {
     const existe = cartList.some((item) => item.id === ProductCart.id);
 
@@ -35,6 +37,12 @@ export default function Home() {
     } else {
       setCartList([...cartList, { ...ProductCart, quantity: 1 }]);
     }
+
+    setToastMessage(`¡Agregaste ${ProductCart.name} al carrito!`);
+
+    setTimeout(() => {
+      setToastMessage("");
+    }, 2000);
   }
 
   function handleUpdateQuantity(id: string, newQuantity: number) {
@@ -67,9 +75,13 @@ export default function Home() {
     setIsCartOpen(false);
   }
 
+  const totalCartCount = cartList.reduce((acumulador, item) => {
+    return acumulador + item.quantity;
+  }, 0);
+
   return (
     <>
-      <Header onOpenCartHeader={onOpenCart} />
+      <Header onOpenCartHeader={onOpenCart} cartCount={totalCartCount} />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <PromoBanner />
 
@@ -81,6 +93,39 @@ export default function Home() {
           makeup={filteredProducts}
           alHacerClicEnAgregar={handleAddToCart}
         />
+
+        <button
+          className=" fixed bottom-5 right-10 z-40 w-12 h-12 flex items-center justify-center bg-primary text-white shadow-xl rounded-full"
+          onClick={() => {
+            onOpenCart();
+          }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-shopping-bag-icon lucide-shopping-bag w-7 h-7 text-white"
+          >
+            <path d="M16 10a4 4 0 0 1-8 0" />
+            <path d="M3.103 6.034h17.794" />
+            <path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z" />
+          </svg>
+
+          {totalCartCount > 0 && (
+            <span className="absolute -top-1 -right-1 rounded-full w-5 h-5  bg-text-muted text-white flex items-center justify-center text-xs border border-white shadow-sm ">
+              {totalCartCount}
+            </span>
+          )}
+        </button>
+        {toastMessage && (
+          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-primary px-4 py-3 rounded-lg shadow-lg ">
+            {toastMessage}
+          </div>
+        )}
 
         <Cart
           isCartOpen={isCartOpen}

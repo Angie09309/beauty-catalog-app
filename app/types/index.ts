@@ -12,12 +12,19 @@ export interface CartItem extends infoProduct {
   quantity: number;
 }
 
-export interface SysProduct {
-  product_id: string;
-  name: string;
-  category_id: string | null;
+export interface DummyProduct {
+  id: number;
+  title: string;
   description: string | null;
-  product_image_name: string;
-  brand_name: string;
-  price: string;
+  category: string;
+  price: number;
+  brand: string;
+  images: string[];
+}
+
+export interface DummyProductsResponse {
+  products: DummyProduct[];
+  total: number;
+  skip: number;
+  limit: number;
 }

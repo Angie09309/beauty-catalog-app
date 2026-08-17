@@ -1,7 +1,6 @@
 import mapearProducto from "./productMapper";
-import { SysProduct } from "../types/index";
 
-const productoPrueba: SysProduct = {
+const productoPrueba = {
   product_id: "296",
   name: "Base Liquida 1St Scene Atenea x 30ml Almond",
   category_id: "27",
@@ -12,5 +11,3 @@ const productoPrueba: SysProduct = {
 };
 
 const productoValushy = mapearProducto(productoPrueba);
-
-console.log(productoValushy);

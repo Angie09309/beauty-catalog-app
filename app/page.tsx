@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ProductGrid } from "./components/ProductGrid";
 import { PRODUCTS } from "./data/products";
@@ -9,13 +9,23 @@ import Header from "./components/Header";
 import Cart from "./components/Cart";
 import { CartItem, infoProduct } from "./types/index";
 
+import { getProducts } from "./services/productService";
+
 export default function Home() {
+  const [itemList, setItemList] = useState<infoProduct[]>([]);
+
+  useEffect(() => {
+    getProducts().then((productos) => {
+      setItemList(productos);
+    });
+  }, []);
+
   const [itemBrand, setItemBrand] = useState("Todas");
 
   const filteredProducts =
     itemBrand === "Todas"
-      ? PRODUCTS
-      : PRODUCTS.filter((productos) => productos.brand === itemBrand);
+      ? itemList
+      : itemList.filter((productos) => productos.brand === itemBrand);
 
   const [cartList, setCartList] = useState<CartItem[]>([]);
 

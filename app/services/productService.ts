@@ -1,9 +1,11 @@
 import { DummyProductsResponse } from "../types";
+import mapearProducto from "../utils/productMapper";
 
 export async function getProducts() {
-  const response = await fetch("https://dummyjson.com/products");
+  const response = await fetch("https://dummyjson.com/product/category/beauty");
 
-  const data = await response.json();
+  const data: DummyProductsResponse = await response.json();
 
-  console.log(data);
+  const productosMapeados = data.products.map(mapearProducto);
+  return productosMapeados;
 }

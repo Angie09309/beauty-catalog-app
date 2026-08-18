@@ -1,13 +1,13 @@
-import { SysProduct, infoProduct } from "../types/index";
+import { DummyProduct, infoProduct } from "../types/index";
 
-export default function mapearProducto(producto: SysProduct): infoProduct {
+export default function mapearProducto(producto: DummyProduct): infoProduct {
   return {
-    id: producto.product_id,
-    name: producto.name,
-    brand: producto.brand_name,
-    category: "General",
-    price: Number(producto.price),
-    imageUrl: `https://sysvariedades.com.co/sistema/public/images/uploads/products/${producto.product_image_name}`,
+    id: String(producto.id),
+    name: producto.title,
+    brand: producto.brand,
+    category: producto.category,
+    price: producto.price,
+    imageUrl: producto.images[0],
     description: producto.description,
   };
 }

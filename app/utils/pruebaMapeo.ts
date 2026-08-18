@@ -1,13 +1,16 @@
 import mapearProducto from "./productMapper";
+import { DummyProduct } from "../types/index";
 
-const productoPrueba = {
-  product_id: "296",
-  name: "Base Liquida 1St Scene Atenea x 30ml Almond",
-  category_id: "27",
-  description: null,
-  product_image_name: "1770586038_f1972a4d9a7cc88bdfba.jpg",
-  brand_name: "ATENEA",
-  price: "31800",
+const productoPrueba: DummyProduct = {
+  id: 1,
+  title: "Essence Mascara Lash Princess",
+  description: "Máscara de pestañas...",
+  category: "beauty",
+  price: 9.99,
+  brand: "Essence",
+  images: [
+    "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/1.webp",
+  ],
 };
 
 const productoValushy = mapearProducto(productoPrueba);

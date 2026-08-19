@@ -1,16 +1,15 @@
 import mapearProducto from "./productMapper";
-import { DummyProduct } from "../types/index";
+import { MakeupProduct } from "../types/index";
 
-const productoPrueba: DummyProduct = {
+const productoPrueba: MakeupProduct = {
   id: 1,
-  title: "Essence Mascara Lash Princess",
+  name: "Essence Mascara Lash Princess",
   description: "Máscara de pestañas...",
   category: "beauty",
-  price: 9.99,
+  price: "9.99",
   brand: "Essence",
-  images: [
-    "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/1.webp",
-  ],
+  image_link: "",
+  product_type: "Mascara",
 };
 
-const productoValushy = mapearProducto(productoPrueba);
+const producto = mapearProducto(productoPrueba);

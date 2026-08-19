@@ -27,6 +27,18 @@ export default function Home() {
       ? itemList
       : itemList.filter((productos) => productos.brand === itemBrand);
 
+  const [itemCategory, setItemCategory] = useState("Todas");
+
+  const categories = [
+    "Todas",
+    ...Array.from(new Set(itemList.map((item) => item.productType))),
+  ];
+
+  const filteredProductsByCategory =
+    itemCategory === "Todas"
+      ? itemList
+      : itemList.filter((item) => item.productType === itemCategory);
+
   const [cartList, setCartList] = useState<CartItem[]>([]);
 
   const [toastMessage, setToastMessage] = useState("");

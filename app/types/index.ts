@@ -6,25 +6,20 @@ export interface infoProduct {
   price: number;
   imageUrl: string;
   description: string | null;
+  productType: string;
 }
 
 export interface CartItem extends infoProduct {
   quantity: number;
 }
 
-export interface DummyProduct {
+export interface MakeupProduct {
   id: number;
-  title: string;
-  description: string | null;
-  category: string;
-  price: number;
+  name: string;
   brand: string;
-  images: string[];
-}
-
-export interface DummyProductsResponse {
-  products: DummyProduct[];
-  total: number;
-  skip: number;
-  limit: number;
+  category: string | null;
+  price: string;
+  image_link: string;
+  description: string | null;
+  product_type: string;
 }

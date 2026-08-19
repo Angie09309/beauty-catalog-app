@@ -17,6 +17,9 @@ export default function ProductCard({
           className="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
           src={unProducto.imageUrl}
           alt={unProducto.name}
+          onError={(e) => {
+            e.currentTarget.src = "/img/placeholder.png";
+          }}
         />
       </div>
 

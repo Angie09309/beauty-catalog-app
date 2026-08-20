@@ -3,7 +3,7 @@ import mapearProducto from "../utils/productMapper";
 
 export async function getProducts(): Promise<infoProduct[]> {
   const response = await fetch(
-    "http://makeup-api.herokuapp.com/api/v1/products.json?product_type=foundation",
+    "http://makeup-api.herokuapp.com/api/v1/products.json",
   );
 
   const data: MakeupProduct[] = await response.json();

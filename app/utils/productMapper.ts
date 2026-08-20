@@ -4,7 +4,7 @@ export default function mapearProducto(producto: MakeupProduct): infoProduct {
   return {
     id: String(producto.id),
     name: producto.name,
-    brand: producto.brand,
+    brand: producto.brand ?? "Sin marca",
     category: producto.category ?? "General",
     price: Number(producto.price),
     imageUrl: producto.image_link,

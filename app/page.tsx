@@ -12,32 +12,43 @@ import { CartItem, infoProduct } from "./types/index";
 import { getProducts } from "./services/productService";
 
 export default function Home() {
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
   const [itemList, setItemList] = useState<infoProduct[]>([]);
 
   useEffect(() => {
-    getProducts().then((productos) => {
-      setItemList(productos);
-    });
+    getProducts()
+      .then((productos) => {
+        setItemList(productos);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("No se pudieron obtener los productos", err);
+        setError("No pudimos cargar los productos");
+        setLoading(false);
+      });
   }, []);
 
   const [itemBrand, setItemBrand] = useState("Todas");
-
-  const filteredProducts =
-    itemBrand === "Todas"
-      ? itemList
-      : itemList.filter((productos) => productos.brand === itemBrand);
-
   const [itemCategory, setItemCategory] = useState("Todas");
+
+  const filteredProducts = itemList.filter((item) => {
+    const cumpleMarca =
+      itemBrand === "Todas" ||
+      item.brand?.toLowerCase() === itemBrand.toLowerCase();
+
+    const cumpleCategoria =
+      itemCategory === "Todas" ||
+      item.productType.toLowerCase() === itemCategory.toLowerCase();
+
+    return cumpleMarca && cumpleCategoria;
+  });
 
   const categories = [
     "Todas",
     ...Array.from(new Set(itemList.map((item) => item.productType))),
   ];
-
-  const filteredProductsByCategory =
-    itemCategory === "Todas"
-      ? itemList
-      : itemList.filter((item) => item.productType === itemCategory);
 
   const [cartList, setCartList] = useState<CartItem[]>([]);
 
@@ -111,10 +122,21 @@ export default function Home() {
         <BrandFilter selectedBrand={itemBrand} onSelectBrand={setItemBrand} />
 
         <h2 className="text-xl font-semibold mt-8 mb-4">Catálogo</h2>
-        <ProductGrid
-          makeup={filteredProducts}
-          alHacerClicEnAgregar={handleAddToCart}
-        />
+
+        {loading && <p>Cargando productos...</p>}
+
+        {!loading && error && <p>{error}</p>}
+
+        {!loading && !error && itemList.length === 0 && (
+          <p>No encontramos productos</p>
+        )}
+
+        {!loading && !error && itemList.length > 0 && (
+          <ProductGrid
+            makeup={filteredProducts}
+            alHacerClicEnAgregar={handleAddToCart}
+          />
+        )}
 
         <button
           className=" fixed bottom-5 right-10 z-40 w-12 h-12 flex items-center justify-center bg-primary text-white shadow-xl rounded-full"

@@ -118,6 +118,26 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <PromoBanner />
 
+        <div className="flex flex-wrap gap-6">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => {
+                setItemCategory(category);
+              }}
+              className={`rounded-full border-2 border-primary p-4 hover:border-brand-border transition-colors cursor-pointer 
+            ${
+              itemCategory === category
+                ? "bg-primary text-white hover:border-brand-border "
+                : "bg-card text-text-main  hover:border-brand-border hover:bg-brand-border "
+            }
+            `}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+
         <h2 className="text-xl font-semibold my-4">Marcas destacadas</h2>
         <BrandFilter selectedBrand={itemBrand} onSelectBrand={setItemBrand} />
 
@@ -166,7 +186,7 @@ export default function Home() {
           )}
         </button>
         {toastMessage && (
-          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-primary px-4 py-3 rounded-lg shadow-lg ">
+          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-primary text-white px-4 py-3 rounded-lg shadow-lg ">
             {toastMessage}
           </div>
         )}

@@ -1,9 +1,16 @@
 interface HeaderProp {
   onOpenCartHeader: () => void;
   cartCount: number;
+  searchTerm: string;
+  setSearchTerm: (value: string) => void;
 }
 
-export default function Header({ onOpenCartHeader, cartCount }: HeaderProp) {
+export default function Header({
+  onOpenCartHeader,
+  cartCount,
+  setSearchTerm,
+  searchTerm,
+}: HeaderProp) {
   return (
     <header className="w-full border-b border-primary/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-3">
@@ -35,6 +42,8 @@ export default function Header({ onOpenCartHeader, cartCount }: HeaderProp) {
               type="text"
               placeholder="Buscar marcas o productos"
               aria-label="Buscar marcas o productos"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
 

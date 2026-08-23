@@ -32,6 +32,7 @@ export default function Home() {
 
   const [itemBrand, setItemBrand] = useState("Todas");
   const [itemCategory, setItemCategory] = useState("Todas");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const filteredProducts = itemList.filter((item) => {
     const cumpleMarca =
@@ -42,7 +43,13 @@ export default function Home() {
       itemCategory === "Todas" ||
       item.productType.toLowerCase() === itemCategory.toLowerCase();
 
-    return cumpleMarca && cumpleCategoria;
+    const cumpleBusqueda =
+      searchTerm.length === 0
+        ? true
+        : item.brand?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.name?.toLowerCase().includes(searchTerm.toLowerCase());
+
+    return cumpleMarca && cumpleCategoria && cumpleBusqueda;
   });
 
   const categories = [
@@ -114,7 +121,12 @@ export default function Home() {
 
   return (
     <>
-      <Header onOpenCartHeader={onOpenCart} cartCount={totalCartCount} />
+      <Header
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        onOpenCartHeader={onOpenCart}
+        cartCount={totalCartCount}
+      />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <PromoBanner />
 

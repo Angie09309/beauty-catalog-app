@@ -6,6 +6,32 @@ interface ProductCardProps {
   onAddToCart: (unProducto: infoProduct) => void;
 }
 
+const imagenes = {
+  labios: ["/img/labios1.png", "/img/labios2.png"],
+  ojos: ["/img/ojos1.png", "/img/ojos2.png"],
+  rostro: ["/img/rostro1.png", "/img/rostro2.png"],
+  nail: ["/img/nail1.png", "/img/nail2.png"],
+  placeholder: ["/img/placeholder1.png", "/img/placeholder2.png"],
+};
+
+function getFallbackImage(productType: string) {
+  let grupoDeImagenes;
+
+  if (productType === "lipstick" || productType === "lip_liner") {
+    grupoDeImagenes = imagenes.labios;
+  } else if (productType === "eyeliner" || productType === "mascara") {
+    grupoDeImagenes = imagenes.ojos;
+  } else if (productType === "nail_polish") {
+    grupoDeImagenes = imagenes.nail;
+  } else if (productType === "foundation") {
+    grupoDeImagenes = imagenes.rostro;
+  } else {
+    grupoDeImagenes = imagenes.placeholder;
+  }
+
+  return grupoDeImagenes[Math.floor(Math.random() * grupoDeImagenes.length)];
+}
+
 export default function ProductCard({
   unProducto,
   onAddToCart,
@@ -18,7 +44,7 @@ export default function ProductCard({
           src={unProducto.imageUrl}
           alt={unProducto.name}
           onError={(e) => {
-            e.currentTarget.src = "/img/placeholder.png";
+            e.currentTarget.src = getFallbackImage(unProducto.productType);
           }}
         />
       </div>

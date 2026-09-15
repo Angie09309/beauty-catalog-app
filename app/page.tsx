@@ -47,7 +47,8 @@ export default function Home() {
       searchTerm.length === 0
         ? true
         : item.brand?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.name?.toLowerCase().includes(searchTerm.toLowerCase());
+          item.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.productType?.toLowerCase().includes(searchTerm.toLowerCase());
 
     return cumpleMarca && cumpleCategoria && cumpleBusqueda;
   });
@@ -162,6 +163,13 @@ export default function Home() {
         {!loading && !error && itemList.length === 0 && (
           <p>No encontramos productos</p>
         )}
+
+        {!loading &&
+          !error &&
+          itemList.length > 0 &&
+          filteredProducts.length === 0 && (
+            <p>No encontramos productos que coincidan con tu búsqueda.</p>
+          )}
 
         {!loading && !error && itemList.length > 0 && (
           <ProductGrid

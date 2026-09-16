@@ -17,6 +17,8 @@ export default function Home() {
 
   const [itemList, setItemList] = useState<infoProduct[]>([]);
 
+  const [currentPage, setCurrentPage] = useState(1);
+
   useEffect(() => {
     getProducts()
       .then((productos) => {
@@ -52,6 +54,15 @@ export default function Home() {
 
     return cumpleMarca && cumpleCategoria && cumpleBusqueda;
   });
+
+  const productsPerPage = 20;
+  const productosVisibles = filteredProducts.slice(
+    (currentPage - 1) * productsPerPage,
+    currentPage * productsPerPage,
+  );
+
+  const resultado = filteredProducts.length / productsPerPage;
+  const totalPages = Math.ceil(resultado);
 
   const categories = [
     "Todas",
@@ -137,6 +148,7 @@ export default function Home() {
               key={category}
               onClick={() => {
                 setItemCategory(category);
+                setCurrentPage(1);
               }}
               className={`rounded-full border-2 border-primary p-4 hover:border-brand-border transition-colors cursor-pointer 
             ${
@@ -152,7 +164,13 @@ export default function Home() {
         </div>
 
         <h2 className="text-xl font-semibold my-4">Marcas destacadas</h2>
-        <BrandFilter selectedBrand={itemBrand} onSelectBrand={setItemBrand} />
+        <BrandFilter
+          selectedBrand={itemBrand}
+          onSelectBrand={(marca) => {
+            setItemBrand(marca);
+            setCurrentPage(1);
+          }}
+        />
 
         <h2 className="text-xl font-semibold mt-8 mb-4">Catálogo</h2>
 
@@ -173,10 +191,54 @@ export default function Home() {
 
         {!loading && !error && itemList.length > 0 && (
           <ProductGrid
-            makeup={filteredProducts}
+            makeup={productosVisibles}
             alHacerClicEnAgregar={handleAddToCart}
           />
         )}
+
+        <button
+          onClick={() => {
+            if (currentPage > 1) {
+              setCurrentPage(currentPage - 1);
+            }
+          }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-chevron-left w-10
+            h-10"
+          >
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+        </button>
+
+        <button
+          onClick={() => {
+            if (currentPage < totalPages) {
+              setCurrentPage(currentPage + 1);
+            }
+          }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-chevron-right w-10
+            h-10"
+          >
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </button>
 
         <button
           className=" fixed bottom-5 right-10 z-40 w-12 h-12 flex items-center justify-center bg-primary text-white shadow-xl rounded-full"

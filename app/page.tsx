@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import { ProductGrid } from "./components/ProductGrid";
 import { PRODUCTS } from "./data/products";
@@ -131,6 +131,67 @@ export default function Home() {
     return acumulador + item.quantity;
   }, 0);
 
+  function obtenerPaginasVisibles() {
+    const lista = [];
+
+    for (let i = 1; i <= totalPages; i++) {
+      if (
+        i === 1 ||
+        i === totalPages ||
+        i === currentPage - 1 ||
+        i === currentPage ||
+        i === currentPage + 1
+      ) {
+        lista.push(i);
+      }
+    }
+
+    return lista;
+  }
+
+  const paginasVisibles = obtenerPaginasVisibles();
+
+  const botones = paginasVisibles.map((item, index) => {
+    const siguiente = paginasVisibles[index + 1];
+
+    return (
+      <Fragment key={item}>
+        <button
+          key={item}
+          className={`w-8 h-8 flex items-center justify-center rounded-2xl transition-colors ${
+            item === currentPage
+              ? "bg-primary text-white shadow-lg"
+              : "text-gray-400 hover:text-primary hover:bg-gray-100"
+          }`}
+          onClick={() => {
+            setCurrentPage(item);
+          }}
+        >
+          {item}
+        </button>
+
+        {siguiente - item > 1 && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-ellipsis"
+          >
+            <circle cx="12" cy="12" r="1" />
+            <circle cx="19" cy="12" r="1" />
+            <circle cx="5" cy="12" r="1" />
+          </svg>
+        )}
+      </Fragment>
+    );
+  });
+
   return (
     <>
       <Header
@@ -196,49 +257,55 @@ export default function Home() {
           />
         )}
 
-        <button
-          onClick={() => {
-            if (currentPage > 1) {
-              setCurrentPage(currentPage - 1);
-            }
-          }}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-chevron-left w-10
-            h-10"
+        <div className="flex justify-center items-center gap-4">
+          <button
+            onClick={() => {
+              if (currentPage > 1) {
+                setCurrentPage(currentPage - 1);
+              }
+            }}
           >
-            <path d="m15 18-6-6 6-6" />
-          </svg>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-chevron-left w-10
+            h-10"
+            >
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+          </button>
 
-        <button
-          onClick={() => {
-            if (currentPage < totalPages) {
-              setCurrentPage(currentPage + 1);
-            }
-          }}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-chevron-right w-10
-            h-10"
+          <div className="flex items-center justify-center gap-2">
+            {botones}
+          </div>
+
+          <button
+            onClick={() => {
+              if (currentPage < totalPages) {
+                setCurrentPage(currentPage + 1);
+              }
+            }}
           >
-            <path d="m9 18 6-6-6-6" />
-          </svg>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-chevron-right w-10
+            h-10"
+            >
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </button>
+        </div>
 
         <button
           className=" fixed bottom-5 right-10 z-40 w-12 h-12 flex items-center justify-center bg-primary text-white shadow-xl rounded-full"

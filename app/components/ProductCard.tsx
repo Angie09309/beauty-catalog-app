@@ -7,11 +7,15 @@ interface ProductCardProps {
 }
 
 const imagenes = {
-  labios: ["/img/labios1.png", "/img/labios2.png"],
-  ojos: ["/img/ojos1.png", "/img/ojos2.png"],
-  rostro: ["/img/rostro1.png", "/img/rostro2.png"],
-  nail: ["/img/nail1.png", "/img/nail2.png"],
-  placeholder: ["/img/placeholder1.png", "/img/placeholder2.png"],
+  labios: ["/img/labios1.png", "/img/labios2.png", "/img/labios3.png"],
+  ojos: ["/img/ojos1.png", "/img/ojos2.png", "/img/ojos3.png"],
+  rostro: ["/img/rostro1.png", "/img/rostro2.png", "/img/rostro3.png"],
+  nail: ["/img/nail1.png", "/img/nail2.png", "/img/nail3.png"],
+  placeholder: [
+    "/img/placeholder1.png",
+    "/img/placeholder2.png",
+    "/img/placeholder3.png",
+  ],
 };
 
 function getFallbackImage(productType: string) {

@@ -64,6 +64,12 @@ export default function Home() {
   const resultado = filteredProducts.length / productsPerPage;
   const totalPages = Math.ceil(resultado);
 
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(1);
+    }
+  }, [currentPage, totalPages]);
+
   const categories = [
     "Todas",
     ...Array.from(new Set(itemList.map((item) => item.productType))),
@@ -157,7 +163,6 @@ export default function Home() {
     return (
       <Fragment key={item}>
         <button
-          key={item}
           className={`w-8 h-8 flex items-center justify-center rounded-2xl transition-colors ${
             item === currentPage
               ? "bg-primary text-white shadow-lg"

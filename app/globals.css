@@ -1,56 +1,85 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap");
+
 @import "tailwindcss";
 
-:root {
-  /* Fondo general */
-  --background: #fcf8f7;
-
-  /* Tarjetas */
-  --card: #ffffff;
-  --card-border: #f2e5e7;
-  --brand-border: #f4d3e0;
-
-  /* Color principal */
-  --primary: #d98aa6;
-  --primary-hover: #c97897;
-
-  /* Colores secundarios */
-  --secondary: #f7d9cf;
-  --accent: #fde9e7e8;
-
-  /* Textos */
-  --text-main: #49363b;
-  --text-muted: #8d777d;
-
-  /* Extras */
-  --success: #f7f0f5;
-  --danger: #31c35a;
-}
-
 @theme inline {
-  --font-serif: "Playfair Display", serif;
-
   --color-background: var(--background);
+  --color-foreground: var(--foreground);
 
   --color-card: var(--card);
-  --color-card-border: var(--card-border);
+  --color-card-foreground: var(--card-foreground);
 
   --color-primary: var(--primary);
-  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
 
   --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
   --color-accent: var(--accent);
-  --color-brand-border: var(--brand-border);
+  --color-accent-foreground: var(--accent-foreground);
 
-  --color-text-main: var(--text-main);
-  --color-text-muted: var(--text-muted);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
 
-  --color-success: var(--success);
-  --color-danger: var(--danger);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "DM Sans", sans-serif;
 }
 
-body {
-  background: var(--background);
-  color: var(--text-main);
-  font-family: "Playfair Display", serif, system-ui;
+:root {
+  /* =========================
+     MAISON
+     ========================= */
+
+  --background: #f6f3ed;
+  --foreground: #242321;
+
+  --card: #fbfaf7;
+  --card-foreground: #242321;
+
+  --primary: #242321;
+  --primary-foreground: #f6f3ed;
+
+  --secondary: #eae5dc;
+  --secondary-foreground: #3d3934;
+
+  --muted: #eeeae2;
+  --muted-foreground: #77716a;
+
+  --accent: #b8a98f;
+  --accent-foreground: #f8f6f0;
+
+  --destructive: #9b514b;
+  --destructive-foreground: #fffaf7;
+
+  --border: #ddd8cf;
+  --input: #ddd8cf;
+  --ring: #777c6a;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+  }
 }

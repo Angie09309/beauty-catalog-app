@@ -41,31 +41,19 @@ export default function ProductCard({
   onAddToCart,
 }: ProductCardProps) {
   return (
-    <div className="w-64 h-120 flex flex-col bg-card border border-card-border rounded-3xl overflow-hidden shadow-md m-2 transition-all  duration-300 hover:-translate-y-1 hover:shadow-lg">
-      <div className="h-72 overflow-hidden">
+    <div className="w-70 h-120 flex flex-col shadow-sm overflow-hidden transition-all duration-300 rounded-xs m-3">
+      <div className="h-110 overflow-hidden relative group">
         <img
-          className="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-101"
           src={unProducto.imageUrl}
           alt={unProducto.name}
           onError={(e) => {
             e.currentTarget.src = getFallbackImage(unProducto.productType);
           }}
         />
-      </div>
-
-      <div className="p-5 flex flex-col grow space-y-4">
-        <span className="text-sm text-text-muted uppercase tracking-widest font-medium">
-          {unProducto.brand}
-        </span>
-        <h3 className="text-base font-semibold line-clamp-2">
-          {unProducto.name}
-        </h3>
-        <span className="text-primary font-bold">
-          {formatearPrecio(unProducto.price)}
-        </span>
 
         <button
-          className=" flex flex-row gap-2 bg-primary rounded-2xl p-2 items-center justify-center text-white mt-auto hover:bg-primary-hover active:scale-95  duration-200 ease-in-out"
+          className=" flex  gap-2 bg-primary  p-2 items-center justify-center text-white hover:bg-primary-hover active:scale-95  duration-500 ease-in-out absolute bottom-0 opacity-0 translate-y-4 w-full group-hover:opacity-100 group-hover:translate-y-0"
           onClick={() => onAddToCart(unProducto)}
         >
           <svg
@@ -85,6 +73,35 @@ export default function ProductCard({
           </svg>
           Agregar al pedido
         </button>
+
+        <button className="absolute top-4 right-6 text-ring bg-amber-50/60 rounded-4xl p-1.5 duration-500 opacity-0 hover:text-destructive group-hover:opacity-100 ">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-3.5 h-3.5"
+          >
+            <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />
+          </svg>
+        </button>
+      </div>
+
+      <div className="p-4 flex flex-col grow space-y-2">
+        <span className="text-sm text-text-muted uppercase tracking-widest font-medium">
+          {unProducto.brand}
+        </span>
+        <div className="flex justify-between">
+          <h3 className="text-base font-semibold line-clamp-2">
+            {unProducto.name}
+          </h3>
+          <span className="text-primary font-medium">
+            {formatearPrecio(unProducto.price)}
+          </span>
+        </div>
       </div>
     </div>
   );

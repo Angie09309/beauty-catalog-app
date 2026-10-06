@@ -33,36 +33,57 @@
 }
 
 :root {
-  /* =========================
-     MAISON
-     ========================= */
-
+  /* Fondo principal de toda la página */
   --background: #f6f3ed;
+
+  /* Texto principal: títulos, nombres, texto importante */
   --foreground: #242321;
 
+  /* Fondo ligeramente más claro que el fondo general */
   --card: #fbfaf7;
+
+  /* Texto cuando se usa dentro de una card */
   --card-foreground: #242321;
 
+  /* Color principal de la marca: botones, acciones importantes */
   --primary: #242321;
+
+  /* Texto que va encima de primary */
   --primary-foreground: #f6f3ed;
 
+  /* Fondo secundario: elementos suaves, badges, superficies */
   --secondary: #eae5dc;
+
+  /* Texto encima de secondary */
   --secondary-foreground: #3d3934;
 
+  /* Fondo muy suave para elementos secundarios */
   --muted: #eeeae2;
+
+  /* Texto secundario / descripciones */
   --muted-foreground: #77716a;
 
-  --accent: #b8a98f;
+  /* Color decorativo/acento de Maison */
+  --accent: #bf9683;
+
+  /* Texto sobre accent */
   --accent-foreground: #f8f6f0;
 
+  /* Errores, eliminar, acciones peligrosas */
   --destructive: #9b514b;
+
+  /* Texto sobre destructive */
   --destructive-foreground: #fffaf7;
 
+  /* Bordes sutiles */
   --border: #ddd8cf;
+
+  /* Bordes de inputs */
   --input: #ddd8cf;
+
+  /* Focus / estados de interacción */
   --ring: #777c6a;
 }
-
 @layer base {
   * {
     border-color: var(--color-border);

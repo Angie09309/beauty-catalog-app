@@ -12,13 +12,11 @@ export default function Header({
   searchTerm,
 }: HeaderProp) {
   return (
-    <header className="w-full border-b border-primary/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-3">
-        <div className="">
-          <h1 className="text-3xl text-primary font-normal tracking-[0.18em] font-display">
-            MAISON.
-          </h1>
-        </div>
+    <header className="w-full h-20 border-b border-primary/20">
+      <div className="max-w-7xl gap-5 md:gap-1 mx-auto px-4 sm:px-6 lg:px-8 h-full flex justify-between items-center">
+        <h1 className="text-2xl md:text-3xl text-primary font-normal tracking-[0.18em] font-display">
+          MAISON.
+        </h1>
 
         <div className="inline-flex items-center gap-5 py-2 border-border border-b w-100 ">
           <svg

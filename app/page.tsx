@@ -2,7 +2,6 @@
 import { Fragment, useEffect, useState } from "react";
 
 import { ProductGrid } from "./components/ProductGrid";
-import { PRODUCTS } from "./data/products";
 import BrandFilter from "./components/BrandFilter";
 import PromoBanner from "./components/PromoBanner";
 import Header from "./components/Header";
@@ -84,6 +83,14 @@ export default function Home() {
     "Todas",
     ...(Object.keys(categoryGroups) as Array<keyof typeof categoryGroups>),
   ];
+
+  const getBrands = () => {
+    return itemList.map((e) => e.brand);
+  };
+
+  const brandSet = new Set(getBrands());
+
+  const brand = [...brandSet];
 
   const [cartList, setCartList] = useState<CartItem[]>([]);
 
@@ -241,6 +248,7 @@ export default function Home() {
 
         <h2 className="text-xl font-semibold my-4">Marcas destacadas</h2>
         <BrandFilter
+          brand={brand}
           selectedBrand={itemBrand}
           onSelectBrand={(marca) => {
             setItemBrand(marca);

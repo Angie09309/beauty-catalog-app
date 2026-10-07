@@ -32,8 +32,17 @@ export default function Home() {
       });
   }, []);
 
+  const categoryGroups = {
+    Labios: ["lipstick", "lip_liner"],
+    Ojos: ["eyeliner", "mascara"],
+    Rostro: ["foundation"],
+    Uñas: ["nail_polish"],
+  };
+
+  type Category = "Todas" | keyof typeof categoryGroups;
+
   const [itemBrand, setItemBrand] = useState("Todas");
-  const [itemCategory, setItemCategory] = useState("Todas");
+  const [itemCategory, setItemCategory] = useState<Category>("Todas");
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredProducts = itemList.filter((item) => {
@@ -42,8 +51,9 @@ export default function Home() {
       item.brand?.toLowerCase() === itemBrand.toLowerCase();
 
     const cumpleCategoria =
-      itemCategory === "Todas" ||
-      item.productType.toLowerCase() === itemCategory.toLowerCase();
+      itemCategory === "Todas"
+        ? true
+        : categoryGroups[itemCategory].includes(item.productType);
 
     const cumpleBusqueda =
       searchTerm.length === 0
@@ -70,9 +80,9 @@ export default function Home() {
     }
   }, [currentPage, totalPages]);
 
-  const categories = [
+  const categories: Category[] = [
     "Todas",
-    ...Array.from(new Set(itemList.map((item) => item.productType))),
+    ...(Object.keys(categoryGroups) as Array<keyof typeof categoryGroups>),
   ];
 
   const [cartList, setCartList] = useState<CartItem[]>([]);

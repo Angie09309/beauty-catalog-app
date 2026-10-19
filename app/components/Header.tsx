@@ -12,7 +12,7 @@ export default function Header({
   searchTerm,
 }: HeaderProp) {
   return (
-    <header className="w-full h-20 border-b border-primary/20">
+    <header className="w-full h-20 border-b border-primary/20 sticky top-0 z-40 bg-background/80">
       <div className="max-w-7xl gap-5 md:gap-1 mx-auto px-4 sm:px-6 lg:px-8 h-full flex justify-between items-center">
         <h1 className="text-2xl md:text-3xl text-primary font-normal tracking-[0.18em] font-display">
           MAISON.

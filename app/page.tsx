@@ -38,6 +38,14 @@ export default function Home() {
     Uñas: ["nail_polish"],
   };
 
+  const categoryImages = {
+    Todas: "/categorias/todas.png",
+    Labios: "/categorias/labios.png",
+    Ojos: "/categorias/ojos.png",
+    Rostro: "/categorias/rostro.png",
+    Uñas: "/categorias/unas.png",
+  };
+
   type Category = "Todas" | keyof typeof categoryGroups;
 
   const [itemBrand, setItemBrand] = useState("Todas");
@@ -225,7 +233,7 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <PromoBanner />
 
-        <div className="flex flex-wrap gap-6">
+        <div className="flex flex-wrap justify-center gap-6 bg-background text-foreground  ">
           {categories.map((category) => (
             <button
               key={category}
@@ -233,15 +241,31 @@ export default function Home() {
                 setItemCategory(category);
                 setCurrentPage(1);
               }}
-              className={`rounded-full border-2 border-primary p-4 hover:border-brand-border transition-colors cursor-pointer 
+              className={`flex flex-col items-center rounded-md border-0 p-4 w-56 shrink-0 hover:border-brand-border transition-colors cursor-pointer 
             ${
               itemCategory === category
-                ? "bg-primary text-white hover:border-brand-border "
-                : "bg-card text-text-main  hover:border-brand-border hover:bg-brand-border "
+                ? "bg-card text-foreground"
+                : "bg-card text-foreground hover:bg-secondary"
             }
             `}
             >
-              {category}
+              <img
+                className="w-full h-56 object-cover"
+                src={categoryImages[category]}
+                alt={category}
+              />
+
+              <span
+                className={`mt-4 
+              ${
+                itemCategory === category
+                  ? "border-b-2 border-accent"
+                  : "border-none"
+              }
+              `}
+              >
+                {category}
+              </span>
             </button>
           ))}
         </div>

@@ -44,7 +44,6 @@ export default function ProductCard({
   isFavorite,
   onToggleFavorite,
 }: ProductCardProps) {
-  console.log(unProducto.id, isFavorite);
   return (
     <div className="w-70 h-120 flex flex-col shadow-sm overflow-hidden transition-all duration-300 rounded-xs m-3">
       <div className="h-110 overflow-hidden relative group">

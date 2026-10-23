@@ -3,6 +3,7 @@ interface HeaderProp {
   cartCount: number;
   searchTerm: string;
   setSearchTerm: (value: string) => void;
+  onToggleFavorites: () => void;
 }
 
 export default function Header({
@@ -10,6 +11,7 @@ export default function Header({
   cartCount,
   setSearchTerm,
   searchTerm,
+  onToggleFavorites,
 }: HeaderProp) {
   return (
     <header className="w-full h-20 border-b border-primary/20 sticky top-0 z-40 bg-background/80">
@@ -44,7 +46,7 @@ export default function Header({
         </div>
 
         <div className="flex items-center gap-4">
-          <button>
+          <button onClick={() => onToggleFavorites()}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"

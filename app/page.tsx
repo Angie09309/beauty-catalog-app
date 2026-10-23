@@ -102,6 +102,26 @@ export default function Home() {
 
   const [cartList, setCartList] = useState<CartItem[]>([]);
 
+  const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
+
+  const [mostrarFavoritos, setMostrarFavoritos] = useState(false);
+
+  function toggleFavorite(productId: string) {
+    if (favoriteIds.includes(productId)) {
+      setFavoriteIds(favoriteIds.filter((id) => id !== productId));
+    } else {
+      setFavoriteIds([...favoriteIds, productId]);
+    }
+  }
+
+  const productosFavoritos = itemList.filter((producto) => {
+    return favoriteIds.includes(producto.id);
+  });
+
+  function alternarFavoritos() {
+    setMostrarFavoritos(!mostrarFavoritos);
+  }
+
   const [toastMessage, setToastMessage] = useState("");
 
   function handleAddToCart(ProductCart: infoProduct) {
@@ -229,6 +249,7 @@ export default function Home() {
         setSearchTerm={setSearchTerm}
         onOpenCartHeader={onOpenCart}
         cartCount={totalCartCount}
+        onToggleFavorites={alternarFavoritos}
       />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <PromoBanner />
@@ -270,7 +291,9 @@ export default function Home() {
           ))}
         </div>
 
-        <h2 className="text-xl font-semibold my-4">Marcas destacadas</h2>
+        <h2 className="text-2xl font-serif font-medium mt-12 mb-6">
+          Marcas destacadas
+        </h2>
         <BrandFilter
           brand={brand}
           selectedBrand={itemBrand}
@@ -280,11 +303,21 @@ export default function Home() {
           }}
         />
 
-        <h2 className="text-xl font-semibold mt-8 mb-4">Catálogo</h2>
+        <h2 className="text-2xl font-serif font-medium mt-12 mb-6 ">
+          {mostrarFavoritos ? "Mis favoritos" : "Catálogo"}
+        </h2>
 
-        {loading && <p>Cargando productos...</p>}
+        {loading && (
+          <p className="text-center text-muted-foreground py-12 text-base">
+            Cargando productos...
+          </p>
+        )}
 
-        {!loading && error && <p>{error}</p>}
+        {!loading && error && (
+          <p className="text-center text-muted-foreground py-12 text-base">
+            {error}
+          </p>
+        )}
 
         {!loading && !error && itemList.length === 0 && (
           <p>No encontramos productos</p>
@@ -293,14 +326,41 @@ export default function Home() {
         {!loading &&
           !error &&
           itemList.length > 0 &&
-          filteredProducts.length === 0 && (
-            <p>No encontramos productos que coincidan con tu búsqueda.</p>
+          filteredProducts.length === 0 &&
+          !mostrarFavoritos && (
+            <p className="text-center text-muted-foreground py-12 text-base">
+              No encontramos productos que coincidan con tu búsqueda.
+            </p>
           )}
+
+        {mostrarFavoritos && productosFavoritos.length === 0 && (
+          <div className="flex flex-col items-center justify-center gap-4 py-16 text-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-16 w-16 text-destructive opacity-70"
+            >
+              <path d="M12.409 5.824c-.702.792-1.15 1.496-1.415 2.166l2.153 2.156a.5.5 0 0 1 0 .707l-2.293 2.293a.5.5 0 0 0 0 .707L12 15" />
+              <path d="M13.508 20.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5a5.5 5.5 0 0 1 9.591-3.677.6.6 0 0 0 .818.001A5.5 5.5 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5z" />
+            </svg>
+
+            <h2 className="font-serif text-2xl text-foreground">
+              Aún no tienes favoritos
+            </h2>
+          </div>
+        )}
 
         {!loading && !error && itemList.length > 0 && (
           <ProductGrid
-            makeup={productosVisibles}
+            favorite={favoriteIds}
+            makeup={mostrarFavoritos ? productosFavoritos : productosVisibles}
             alHacerClicEnAgregar={handleAddToCart}
+            onToggleFavorite={toggleFavorite}
           />
         )}
 

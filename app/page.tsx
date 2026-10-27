@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState, useRef } from "react";
 
 import { ProductGrid } from "./components/ProductGrid";
 import BrandFilter from "./components/BrandFilter";
@@ -105,6 +105,16 @@ export default function Home() {
   const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
 
   const [mostrarFavoritos, setMostrarFavoritos] = useState(false);
+
+  const favoritos = useRef<HTMLHeadingElement | null>(null);
+
+  useEffect(() => {
+    if (mostrarFavoritos) {
+      favoritos.current?.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  }, [mostrarFavoritos]);
 
   function toggleFavorite(productId: string) {
     if (favoriteIds.includes(productId)) {
@@ -303,7 +313,10 @@ export default function Home() {
           }}
         />
 
-        <h2 className="text-2xl font-serif font-medium mt-12 mb-6 ">
+        <h2
+          ref={favoritos}
+          className="text-2xl font-serif font-medium mt-12 mb-6 "
+        >
           {mostrarFavoritos ? "Mis favoritos" : "Catálogo"}
         </h2>
 

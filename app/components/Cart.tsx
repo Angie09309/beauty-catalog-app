@@ -29,7 +29,6 @@ export default function Cart({
       total: producto.price * producto.quantity,
     })),
   );
-  console.log("Subtotal calculado:", subtotal);
 
   function generarEnlaceWhatsApp() {
     let numeroTelefono = "573112140676";

@@ -21,6 +21,16 @@ export default function Cart({
     return alcancia + producto.price * producto.quantity;
   }, 0);
 
+  console.table(
+    cartItems.map((producto) => ({
+      nombre: producto.name,
+      precio: producto.price,
+      cantidad: producto.quantity,
+      total: producto.price * producto.quantity,
+    })),
+  );
+  console.log("Subtotal calculado:", subtotal);
+
   function generarEnlaceWhatsApp() {
     let numeroTelefono = "573112140676";
     let frase = "Hola, me gustaría pedir:\n\n";

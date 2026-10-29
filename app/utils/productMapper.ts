@@ -4,7 +4,7 @@ const precioDeterminado = 6000;
 export default function mapearProducto(producto: MakeupProduct): infoProduct {
   const precioOriginal = Number(producto.price);
   const precioValido = Number.isFinite(precioOriginal) && precioOriginal > 0;
-  const precioFinal = precioValido ? precioOriginal : precioDeterminado;
+  const precioFinal = precioValido ? precioOriginal * 1000 : precioDeterminado;
   return {
     id: String(producto.id),
     name: producto.name,

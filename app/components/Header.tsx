@@ -1,6 +1,7 @@
 interface HeaderProp {
   onOpenCartHeader: () => void;
   cartCount: number;
+  favoriteCount: number;
   searchTerm: string;
   setSearchTerm: (value: string) => void;
   onToggleFavorites: () => void;
@@ -9,18 +10,19 @@ interface HeaderProp {
 export default function Header({
   onOpenCartHeader,
   cartCount,
+  favoriteCount,
   setSearchTerm,
   searchTerm,
   onToggleFavorites,
 }: HeaderProp) {
   return (
-    <header className="w-full h-20 border-b border-primary/20 sticky top-0 z-40 bg-background/80">
-      <div className="max-w-7xl gap-5 md:gap-1 mx-auto px-4 sm:px-6 lg:px-8 h-full flex justify-between items-center">
+    <header className="w-full min-w-0 h-20 border-b border-primary/20 sticky top-0 z-40 bg-background">
+      <div className="max-w-7xl gap-3 md:gap-1 mx-auto px-3 sm:px-6 lg:px-8 h-full flex justify-between items-center">
         <h1 className="text-2xl md:text-3xl text-primary font-normal tracking-[0.18em] font-display">
           MAISON.
         </h1>
 
-        <div className="inline-flex items-center gap-5 py-2 border-border border-b w-100 ">
+        <div className="inline-flex items-center gap-2 py-2 border-border border-b w-full max-w-100 min-w-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -46,7 +48,11 @@ export default function Header({
         </div>
 
         <div className="flex items-center gap-4">
-          <button onClick={() => onToggleFavorites()}>
+          <button
+            onClick={onToggleFavorites}
+            aria-label={`Ver favoritos: ${favoriteCount}`}
+            className="relative p-1 text-primary transition-colors hover:text-destructive"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -55,10 +61,16 @@ export default function Header({
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="w-5 h-5"
+              className="w-6 h-6"
             >
               <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />
             </svg>
+
+            {favoriteCount > 0 && (
+              <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-[10px] font-medium text-foreground">
+                {favoriteCount}
+              </span>
+            )}
           </button>
 
           <button
@@ -75,7 +87,7 @@ export default function Header({
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="lucide lucide-shopping-bag w-5 h-5 text-primary"
+              className="lucide lucide-shopping-bag w-6 h-6 text-primary"
             >
               <path d="M16 10a4 4 0 0 1-8 0" />
               <path d="M3.103 6.034h17.794" />
@@ -83,7 +95,7 @@ export default function Header({
             </svg>
 
             {cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 rounded-full w-4.5 h-4.5 bg-card-border flex items-center justify-center text-xs text-text-muted  ">
+              <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-[10px] font-medium text-foreground">
                 {cartCount}
               </span>
             )}

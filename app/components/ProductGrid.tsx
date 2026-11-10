@@ -15,7 +15,7 @@ export function ProductGrid({
   onToggleFavorite,
 }: ProductGridProps) {
   return (
-    <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-cente w-full">
+    <section className="grid w-full min-w-0 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 sm:gap-x-4 gap-y-6 sm:gap-y-8">
       {makeup.map((productoIndividual) => (
         <ProductCard
           key={productoIndividual.id}

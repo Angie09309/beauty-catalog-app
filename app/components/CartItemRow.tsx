@@ -13,34 +13,34 @@ export default function CartItemRow({
   onRemove,
 }: CartItemRowProps) {
   return (
-    <div className="flex gap-3 border border-card-border rounded-2xl shadow-xs my-2.5 p-2 ">
+    <div className="flex gap-3 border-b border-border py-4 first:pt-2 last:border-b-0">
       <img
         src={productCart.imageUrl}
         alt={productCart.name}
-        className="w-20 h-20 object-cover rounded-2xl"
+        className="w-24 h-28 object-cover rounded-sm shrink-0"
       />
 
-      <div className="grow min-w-0 flex flex-col justify-between">
+      <div className="grow min-w-0 flex flex-col justify-between py-1">
         <div>
-          <h2 className="text-base font-medium line-clamp-1">
+          <h2 className="text-sm font-medium leading-snug line-clamp-2">
             {productCart.name}
           </h2>
-          <p className="text-xs text-text-muted uppercase tracking-widest mt-0.5">
+          <p className="text-xs text-muted-foreground uppercase tracking-widest mt-1">
             {productCart.brand}
           </p>
         </div>
-        <span className="text-base text-primary font-bold">
+        <span className="text-sm font-semibold text-foreground tabular-nums">
           {formatearPrecio(productCart.price)}
         </span>
       </div>
 
       <div className="flex flex-col justify-between items-end">
-        <div className="flex text-sm items-center border border-card-border rounded-full justify-center overflow-hidden h-8 ">
+        <div className="flex text-sm items-center border border-border rounded-full justify-center overflow-hidden h-8 ">
           <button
             onClick={() =>
               onUpdateQuantity(productCart.id, productCart.quantity - 1)
             }
-            className=" h-full flex items-center px-1.5 rounded-full justify-center  hover:bg-brand-border transition-colors active:bg-brand-border "
+            className=" h-full flex items-center px-1.5 rounded-full justify-center  hover:bg-secondary transition-colors active:bg-brand-border "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +62,7 @@ export default function CartItemRow({
             onClick={() =>
               onUpdateQuantity(productCart.id, productCart.quantity + 1)
             }
-            className="h-full flex items-center px-1.5 rounded-full justify-center  hover:bg-brand-border transition-colors"
+            className="h-full flex items-center px-1.5 rounded-full justify-center  hover:bg-secondary transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +81,7 @@ export default function CartItemRow({
         </div>
         <button
           onClick={() => onRemove(productCart.id)}
-          className="p-2 rounded-full text-text-muted hover:text-primary-hover active:bg-primary-hover"
+          className="p-2 rounded-full text-muted-foreground transition-colors duration-200 hover:text-destructive hover:bg-secondary"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

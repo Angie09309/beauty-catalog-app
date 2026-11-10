@@ -316,13 +316,14 @@ export default function Home() {
         onOpenCartHeader={onOpenCart}
         cartCount={totalCartCount}
         onToggleFavorites={alternarFavoritos}
+        favoriteCount={favoriteIds.length}
       />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="w-full min-w-0 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 overflow-x-clip">
         <PromoBanner />
 
         {/* Categorías */}
-        <div className="flex flex-wrap justify-center gap-6 bg-background text-foreground">
+        <div className="grid w-full min-w-0 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 bg-background text-foreground">
           {categories.map((category) => (
             <button
               key={category}
@@ -330,14 +331,14 @@ export default function Home() {
                 setItemCategory(category);
                 setCurrentPage(1);
               }}
-              className={`flex flex-col items-center rounded-md border-0 p-4 w-56 shrink-0 hover:border-brand-border transition-colors cursor-pointer ${
+              className={`flex min-w-0 w-full flex-col items-center rounded-md border-0 p-2 sm:p-3 hover:border-brand-border transition-colors cursor-pointer ${
                 itemCategory === category
                   ? "bg-card text-foreground"
                   : "bg-card text-foreground hover:bg-secondary"
               }`}
             >
               <img
-                className="w-full h-56 object-cover"
+                className="block w-full aspect-square object-cover"
                 src={categoryImages[category]}
                 alt={category}
               />
@@ -514,34 +515,6 @@ export default function Home() {
             </button>
           </div>
         )}
-
-        {/* Botón flotante del carrito */}
-        <button
-          aria-label="Abrir carrito"
-          className="fixed bottom-5 right-10 z-40 w-12 h-12 flex items-center justify-center bg-primary text-white shadow-xl rounded-full"
-          onClick={onOpenCart}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-shopping-bag-icon lucide-shopping-bag w-7 h-7 text-white"
-          >
-            <path d="M16 10a4 4 0 0 1-8 0" />
-            <path d="M3.103 6.034h17.794" />
-            <path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z" />
-          </svg>
-
-          {totalCartCount > 0 && (
-            <span className="absolute -top-1 -right-1 rounded-full w-5 h-5 bg-text-muted text-white flex items-center justify-center text-xs border border-white shadow-sm">
-              {totalCartCount}
-            </span>
-          )}
-        </button>
 
         {/* Mensaje al agregar un producto */}
         {toastMessage && (

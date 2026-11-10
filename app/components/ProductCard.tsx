@@ -18,8 +18,8 @@ export default function ProductCard({
 }: ProductCardProps) {
   const [imagenActual, setImagenActual] = useState(unProducto.imageUrl);
   return (
-    <div className="w-70 h-120 flex flex-col shadow-sm overflow-hidden transition-all duration-300 rounded-xs m-3">
-      <div className="h-110 overflow-hidden relative group">
+    <div className="w-full min-w-0 h-full flex flex-col overflow-hidden transition-shadow duration-300 hover:shadow-sm">
+      <div className="w-full aspect-7/10 overflow-hidden relative group">
         <img
           className="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-101"
           src={imagenActual}
@@ -73,10 +73,10 @@ export default function ProductCard({
       </div>
 
       <div className="p-4 flex flex-col grow space-y-2">
-        <span className="text-sm text-text-muted uppercase tracking-widest font-medium">
+        <span className="text-xs text-muted-foreground uppercase tracking-widest font-medium">
           {unProducto.brand}
         </span>
-        <div className="flex justify-between">
+        <div className="flex flex-col items-start gap-2">
           <h3 className="text-base font-semibold line-clamp-2">
             {unProducto.name}
           </h3>

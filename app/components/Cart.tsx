@@ -28,10 +28,10 @@ export default function Cart({
     cartItems.forEach((item) => {
       frase +=
         "• *" +
-        item.name +
-        "* (x" +
+        item.name.trim() +
+        "* — x" +
         item.quantity +
-        ") -" +
+        " · " +
         formatearPrecio(item.price) +
         "\n";
     });
@@ -43,19 +43,19 @@ export default function Cart({
 
   return (
     <div
-      className={`fixed top-0 right-0 z-50 h-full w-full sm:w-110 flex flex-col p-6 bg-card border-l border-card-border shadow-2xl transition-transform duration-300
+      className={`fixed top-0 right-0 z-50 h-full w-full sm:w-110 flex flex-col p-6 bg-card border-l border-border shadow-2xl transition-transform duration-300
     
      ${isCartOpen === true ? "translate-x-0 " : "translate-x-full"}
     `}
     >
-      <div className="flex justify-between mb-3 ">
-        <h1 className="font-semibold text-3xl  ">Tu pedido</h1>
+      <div className="flex justify-between mb-3">
+        <h1 className="font-semibold text-3xl">Tu pedido</h1>
 
         <button
           onClick={() => {
             onCloseCartX();
           }}
-          className="flex items-center justify-center p-1 border border-transparent rounded-full transition-colors duration-100 hover:text-primary-hover hover:border-current hover:bg-success "
+          className="flex items-center justify-center p-1 border border-transparent rounded-full transition-colors duration-100 hover:text-foreground hover:border-current hover:bg-secondary"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +73,7 @@ export default function Cart({
         </button>
       </div>
 
-      <p className="text-text-muted mb-7 text-sm border-b border-card-border">
+      <p className="text-muted-foreground mb-7 text-sm border-b border-border">
         Revisa tus productos y envíanos el pedido por WhatsApp.
       </p>
 
@@ -115,16 +115,19 @@ export default function Cart({
 
       {cartItems.length > 0 && (
         <>
-          <div className="flex justify-between my-2 border-t border-card-border ">
-            <h3 className="text-2xl">subtotal</h3>
-            <span className="text-2xl"> {formatearPrecio(subtotal)}</span>
+          <div className="flex items-center justify-between mt-4 border-t border-border pt-5">
+            <h3 className="text-xl font-medium text-foreground">subtotal</h3>
+            <span className="text-2xl font-semibold text-foreground tabular-nums">
+              {" "}
+              {formatearPrecio(subtotal)}
+            </span>
           </div>
 
           <a
             href={generarEnlaceWhatsApp()}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex justify-center items-center gap-3 text-lg bg-danger p-2 rounded-4xl text-white my-2"
+            className="flex justify-center items-center gap-3 w-full bg-primary text-primary-foreground text-sm font-medium py-4 px-5 rounded-sm transition-all duration-300 hover:opacity-85 active:scale-[0.99]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -141,7 +144,7 @@ export default function Cart({
             Hacer pedido por WhatsApp
           </a>
 
-          <p className="text-text-muted text-sm">
+          <p className="text-xs text-muted-foreground leading-relaxed mt-3">
             Abrimos WhatsApp con tu lista de productos y el total ya escritos en
             el mensaje.
           </p>

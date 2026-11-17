@@ -38,6 +38,7 @@ export default function Home() {
   // Carrito
   const [cartList, setCartList] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isCartLoaded, setIsCartLoaded] = useState(false);
 
   // Mensaje de confirmación
   const [toastMessage, setToastMessage] = useState("");
@@ -304,6 +305,22 @@ export default function Home() {
     0,
   );
 
+  useEffect(() => {
+    const carritoGuardado = localStorage.getItem("maison-cart");
+
+    if (carritoGuardado) {
+      const arreglo = JSON.parse(carritoGuardado);
+      setCartList(arreglo);
+    }
+    setIsCartLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (isCartLoaded) {
+      const carritoEnTexto = JSON.stringify(cartList);
+      localStorage.setItem("maison-cart", carritoEnTexto);
+    }
+  }, [cartList]);
   // ==========================================
   // 10. INTERFAZ
   // ==========================================

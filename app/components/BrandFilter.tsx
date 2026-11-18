@@ -15,7 +15,8 @@ export default function BrandFilter({
 
   const totalBrandPages = Math.ceil(brand.length / 8);
   const extraBrands = brand.length % 8;
-  const brandsPerPage = Math.floor(brand.length / totalBrandPages);
+  const brandsPerPage =
+    totalBrandPages > 0 ? Math.floor(brand.length / totalBrandPages) : 0;
 
   const start =
     currentBrandPage * brandsPerPage + Math.min(currentBrandPage, extraBrands);
@@ -52,10 +53,10 @@ export default function BrandFilter({
         </svg>
       </button>
 
-      <div className=" flex flex-1 min-w-0">
+      <div className="flex flex-1 min-w-0 overflow-x-auto scrollbar-hide">
         {allBrands.map((marcaItem) => (
           <button
-            className={`px-4 py-2 font-medium transition-colors cursor-pointer text-sm tracking-wider shrink-0 flex-1 text-center overflow-hidden text-ellipsis whitespace-nowrap uppercase
+            className={`px-3 sm:px-4 py-2 font-medium transition-colors cursor-pointer text-xs sm:text-sm tracking-wider shrink-0 text-center whitespace-nowrap uppercase
             ${
               selectedBrand === marcaItem
                 ? "border-b-2 border-accent hover:text-secondary-foreground"

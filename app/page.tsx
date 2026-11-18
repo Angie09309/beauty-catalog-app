@@ -359,7 +359,7 @@ export default function Home() {
         <PromoBanner />
 
         {/* Categorías */}
-        <div className="grid w-full min-w-0 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 bg-background text-foreground">
+        <div className="mt-12 grid w-full min-w-0 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 bg-background text-foreground">
           {categories.map((category) => (
             <button
               key={category}

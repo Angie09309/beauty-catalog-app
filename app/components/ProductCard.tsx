@@ -30,20 +30,18 @@ export default function ProductCard({
         />
 
         <button
-          className=" flex  gap-2 bg-primary  p-2 items-center justify-center text-white hover:bg-primary-hover active:scale-95  duration-500 ease-in-out absolute bottom-0 opacity-0 translate-y-4 w-full group-hover:opacity-100 group-hover:translate-y-0"
+          className="flex gap-2 bg-primary px-2 py-1.5 items-center justify-center text-white text-xs sm:text-sm hover:bg-primary-hover active:scale-95 duration-500 ease-in-out absolute bottom-0 w-full opacity-100 translate-y-0 md:opacity-0 md:translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0"
           onClick={() => onAddToCart({ ...unProducto, imageUrl: imagenActual })}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="lucide lucide-plus-icon lucide-plus"
+            className="lucide lucide-plus-icon lucide-plus h-4 w-4"
           >
             <path d="M5 12h14" />
             <path d="M12 5v14" />
@@ -53,7 +51,11 @@ export default function ProductCard({
 
         <button
           className={`absolute top-4 right-6 bg-amber-50/60 rounded-4xl p-1.5 duration-500  hover:text-destructive group-hover:opacity-100
-        ${isFavorite ? "text-destructive opacity-100" : "text-ring opacity-0"}
+     ${
+       isFavorite
+         ? "text-destructive opacity-100"
+         : "text-ring opacity-100 md:opacity-0"
+     }
          `}
           onClick={() => onToggleFavorite(unProducto.id)}
         >

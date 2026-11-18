@@ -18,11 +18,11 @@ export default function Header({
   return (
     <header className="w-full min-w-0 h-20 border-b border-primary/20 sticky top-0 z-40 bg-background">
       <div className="max-w-7xl gap-3 md:gap-1 mx-auto px-3 sm:px-6 lg:px-8 h-full flex justify-between items-center">
-        <h1 className="text-2xl md:text-3xl text-primary font-normal tracking-[0.18em] font-display">
+        <h1 className="text-xl sm:text-2xl md:text-3xl text-primary font-normal tracking-[0.18em] font-display whitespace-nowrap shrink-0">
           MAISON.
         </h1>
 
-        <div className="inline-flex items-center gap-2 py-2 border-border border-b w-full max-w-100 min-w-0">
+        <div className="flex flex-1 items-center gap-2 py-2 border-border border-b min-w-0 max-w-100">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -38,7 +38,7 @@ export default function Header({
           </svg>
 
           <input
-            className="outline-none w-full bg-transparent"
+            className="outline-none w-full min-w-0 bg-transparent text-xs sm:text-sm"
             type="text"
             placeholder="Buscar marcas o productos"
             aria-label="Buscar marcas o productos"
@@ -47,7 +47,7 @@ export default function Header({
           />
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex shrink-0 items-center gap-3 sm:gap-4">
           <button
             onClick={onToggleFavorites}
             aria-label={`Ver favoritos: ${favoriteCount}`}

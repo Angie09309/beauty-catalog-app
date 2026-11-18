@@ -28,6 +28,7 @@ export default function Home() {
 
   // Favoritos
   const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
+  const [isFavoritesLoaded, setIsFavoritesLoaded] = useState(false);
   const [mostrarFavoritos, setMostrarFavoritos] = useState(false);
   const favoritos = useRef<HTMLHeadingElement | null>(null);
 
@@ -239,6 +240,24 @@ export default function Home() {
       });
     }
   }, [mostrarFavoritos]);
+
+  useEffect(() => {
+    const favoritosGuardados = localStorage.getItem("maison-favorites");
+
+    if (favoritosGuardados) {
+      const favoritos = JSON.parse(favoritosGuardados);
+      setFavoriteIds(favoritos);
+    }
+    setIsFavoritesLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (isFavoritesLoaded) {
+      const favoritosid = JSON.stringify(favoriteIds);
+
+      localStorage.setItem("maison-favorites", favoritosid);
+    }
+  }, [isFavoritesLoaded, favoriteIds]);
 
   // ==========================================
   // 9. FUNCIONES DEL CARRITO

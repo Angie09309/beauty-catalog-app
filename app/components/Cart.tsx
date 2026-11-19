@@ -43,14 +43,13 @@ export default function Cart({
 
   return (
     <div
-      className={`fixed top-0 right-0 z-50 h-full w-full sm:w-110 flex flex-col p-6 bg-card border-l border-border shadow-2xl transition-transform duration-300
+      className={`fixed top-0 right-0 z-50 h-full w-full sm:w-110 flex flex-col p-4 sm:p-5 lg:p-6 bg-card border-l border-border shadow-2xl transition-transform duration-300
     
      ${isCartOpen === true ? "translate-x-0 " : "translate-x-full"}
     `}
     >
       <div className="flex justify-between mb-3">
-        <h1 className="font-semibold text-3xl">Tu pedido</h1>
-
+        <h1 className="font-semibold text-2xl sm:text-3xl">Tu pedido</h1>
         <button
           onClick={() => {
             onCloseCartX();
@@ -77,7 +76,7 @@ export default function Cart({
         Revisa tus productos y envíanos el pedido por WhatsApp.
       </p>
 
-      <div className="flex flex-col grow overflow-auto h-full">
+      <div className="flex-1 min-h-0 flex flex-col overflow-y-auto">
         {cartItems.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full">
             <svg

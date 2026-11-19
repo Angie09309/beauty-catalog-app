@@ -359,7 +359,7 @@ export default function Home() {
         <PromoBanner />
 
         {/* Categorías */}
-        <div className="mt-12 grid w-full min-w-0 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 bg-background text-foreground">
+        <div className="mt-12 grid w-full min-w-0 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-3 gap-y-5 sm:gap-4 bg-background text-foreground">
           {categories.map((category) => (
             <button
               key={category}
@@ -380,7 +380,7 @@ export default function Home() {
               />
 
               <span
-                className={`mt-4 ${
+                className={`mt-2 sm:mt-4 text-xs sm:text-sm tracking-wide ${
                   itemCategory === category
                     ? "border-b-2 border-accent"
                     : "border-none"
@@ -408,10 +408,7 @@ export default function Home() {
 
         {/* Título de la vista actual */}
         <div className="flex items-center justify-between mt-12 mb-6">
-          <h2
-            ref={favoritos}
-            className="text-2xl font-serif font-medium mt-12 mb-6"
-          >
+          <h2 ref={favoritos} className="text-2xl font-serif font-medium">
             {mostrarFavoritos ? "Mis favoritos" : "Catálogo"}
           </h2>
 

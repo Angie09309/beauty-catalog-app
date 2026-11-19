@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface BrandFilterProps {
   selectedBrand: string;
@@ -12,9 +12,31 @@ export default function BrandFilter({
   brand,
 }: BrandFilterProps) {
   const [currentBrandPage, setCurrentBrandPage] = useState(0);
+  const [maxBrandsPerPage, setMaxBrandsPerPage] = useState(8);
 
-  const totalBrandPages = Math.ceil(brand.length / 8);
-  const extraBrands = brand.length % 8;
+  useEffect(() => {
+    const updateBrandsPerPage = () => {
+      if (window.innerWidth < 640) {
+        setMaxBrandsPerPage(3);
+      } else if (window.innerWidth < 1024) {
+        setMaxBrandsPerPage(5);
+      } else {
+        setMaxBrandsPerPage(8);
+      }
+
+      setCurrentBrandPage(0);
+    };
+
+    updateBrandsPerPage();
+    window.addEventListener("resize", updateBrandsPerPage);
+
+    return () => {
+      window.removeEventListener("resize", updateBrandsPerPage);
+    };
+  }, []);
+
+  const totalBrandPages = Math.ceil(brand.length / maxBrandsPerPage);
+  const extraBrands = brand.length % maxBrandsPerPage;
   const brandsPerPage =
     totalBrandPages > 0 ? Math.floor(brand.length / totalBrandPages) : 0;
 
@@ -29,9 +51,9 @@ export default function BrandFilter({
   const allBrands = ["Todas", ...visibleBrands];
 
   return (
-    <div className="flex gap-2 justify-start my-6 overflow-x-auto scrollbar-hide cursor-grab w-full">
+    <div className="flex items-center gap-1 my-6 w-full min-w-0">
       <button
-        className="p-2 text-muted-foreground transition-colors cursor-pointer hover:text-foreground disabled:opacity-40"
+        className="w-10 shrink-0 flex items-center justify-center text-muted-foreground transition-colors cursor-pointer hover:text-foreground disabled:opacity-40"
         disabled={currentBrandPage === 0}
         onClick={() => {
           if (currentBrandPage > 0) {
@@ -53,10 +75,10 @@ export default function BrandFilter({
         </svg>
       </button>
 
-      <div className="flex flex-1 min-w-0 overflow-x-auto scrollbar-hide">
+      <div className="flex flex-1 min-w-0">
         {allBrands.map((marcaItem) => (
           <button
-            className={`px-3 sm:px-4 py-2 font-medium transition-colors cursor-pointer text-xs sm:text-sm tracking-wider shrink-0 text-center whitespace-nowrap uppercase
+            className={`w-0 min-w-0 flex-1 px-1 sm:px-2 py-2 font-medium transition-colors cursor-pointer text-[10px] sm:text-xs lg:text-sm tracking-wide text-center truncate uppercase
             ${
               selectedBrand === marcaItem
                 ? "border-b-2 border-accent hover:text-secondary-foreground"

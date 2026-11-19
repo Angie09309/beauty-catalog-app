@@ -13,11 +13,11 @@ export default function CartItemRow({
   onRemove,
 }: CartItemRowProps) {
   return (
-    <div className="flex gap-3 border-b border-border py-4 first:pt-2 last:border-b-0">
+    <div className="flex gap-2 sm:gap-3 border-b border-border py-4 first:pt-2 last:border-b-0">
       <img
         src={productCart.imageUrl}
         alt={productCart.name}
-        className="w-24 h-28 object-cover rounded-sm shrink-0"
+        className="w-20 h-24 sm:w-24 sm:h-28 object-cover rounded-sm shrink-0"
       />
 
       <div className="grow min-w-0 flex flex-col justify-between py-1">
@@ -35,7 +35,8 @@ export default function CartItemRow({
       </div>
 
       <div className="flex flex-col justify-between items-end">
-        <div className="flex text-sm items-center border border-border rounded-full justify-center overflow-hidden h-8 ">
+        <div className="flex text-xs sm:text-sm items-center border border-border rounded-full justify-center overflow-hidden h-8 shrink-0">
+          {" "}
           <button
             onClick={() =>
               onUpdateQuantity(productCart.id, productCart.quantity - 1)
@@ -55,9 +56,7 @@ export default function CartItemRow({
               <path d="M5 12h14" />
             </svg>
           </button>
-
           <span className="w-8 text-center ">{productCart.quantity}</span>
-
           <button
             onClick={() =>
               onUpdateQuantity(productCart.id, productCart.quantity + 1)

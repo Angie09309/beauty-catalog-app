@@ -30,7 +30,7 @@ export default function ProductCard({
         />
 
         <button
-          className="flex gap-2 bg-primary px-2 py-1.5 items-center justify-center text-white text-xs sm:text-sm hover:bg-primary-hover active:scale-95 duration-500 ease-in-out absolute bottom-0 w-full opacity-100 translate-y-0 md:opacity-0 md:translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0"
+          className="flex gap-1.5 bg-primary px-2 py-2 items-center justify-center text-white text-xs sm:text-sm font-medium hover:bg-primary-hover active:scale-95 duration-500 ease-in-out absolute bottom-0 w-full opacity-100 translate-y-0 lg:opacity-0 lg:translate-y-4 lg:group-hover:opacity-100 lg:group-hover:translate-y-0"
           onClick={() => onAddToCart({ ...unProducto, imageUrl: imagenActual })}
         >
           <svg
@@ -50,12 +50,8 @@ export default function ProductCard({
         </button>
 
         <button
-          className={`absolute top-4 right-6 bg-amber-50/60 rounded-4xl p-1.5 duration-500  hover:text-destructive group-hover:opacity-100
-     ${
-       isFavorite
-         ? "text-destructive opacity-100"
-         : "text-ring opacity-100 md:opacity-0"
-     }
+          className={`absolute top-3 right-3  bg-amber-50/60 rounded-4xl p-1.5 duration-500  hover:text-destructive group-hover:opacity-100
+     ${isFavorite ? "text-destructive opacity-100" : "text-ring opacity-100"}
          `}
           onClick={() => onToggleFavorite(unProducto.id)}
         >
@@ -74,15 +70,15 @@ export default function ProductCard({
         </button>
       </div>
 
-      <div className="p-4 flex flex-col grow space-y-2">
-        <span className="text-xs text-muted-foreground uppercase tracking-widest font-medium">
+      <div className="p-2 sm:p-3 lg:p-4 flex flex-col grow space-y-2">
+        <span className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-widest font-medium">
           {unProducto.brand}
         </span>
-        <div className="flex flex-col items-start gap-2">
-          <h3 className="text-base font-semibold line-clamp-2">
+        <div className="flex flex-col items-start gap-1.5 sm:gap-2">
+          <h3 className="text-sm sm:text-base font-semibold line-clamp-2">
             {unProducto.name}
           </h3>
-          <span className="text-primary font-medium">
+          <span className="text-sm sm:text-base text-primary font-medium">
             {formatearPrecio(unProducto.price)}
           </span>
         </div>

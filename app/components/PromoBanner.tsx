@@ -28,14 +28,13 @@ export default function PromoBanner() {
         </div>
       </div>
 
-      <div className="relative w-full min-w-0 h-auto md:h-[calc(100vh-5rem)]">
+      <div className="relative w-full min-w-0 mt-6 sm:mt-8 md:mt-10 lg:mt-12 md:h-[calc(100vh-9rem)]">
         <img
           src="/img/hero.jpg"
           alt="hero"
-          className="block w-full h-auto max-h-130 object-contain md:h-full md:max-h-none md:object-contain"
+          className="block w-full h-auto md:h-full md:object-cover"
         />
-
-        <div className="absolute bottom-6 md:bottom-14 left-4 md:left-6 bg-muted px-4 md:px-5 py-4 md:py-5">
+        <div className="absolute bottom-4 sm:bottom-6 md:bottom-14 left-4 md:left-6 bg-muted px-4 md:px-5 py-4 md:py-5">
           <h2 className="text-xs tracking-[0.2em] text-muted-foreground">
             RITUAL DESTACADO
           </h2>
